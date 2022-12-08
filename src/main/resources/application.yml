@@ -1,0 +1,56 @@
+micronaut:
+  application:
+    name: mnlon
+  server:      
+      port: ${A5PORT:8123}    
+      cors:
+        enabled: true
+        configurations: 
+            all:
+                maxAge: 3600
+      
+  security:
+    authentication: bearer
+    endpoints:
+      login:
+          enabled: true      
+      logout:
+          enabled: true          
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: ${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}
+
+micronaut.http.client.http-version: 2.0
+              
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/ocho
+    driverClassName: org.postgresql.Driver
+    username: mgb
+    password: '12345'
+    schema-generate: CREATE_UPDATE
+    dialect: postgresql
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        connection:
+          db-type: postgres
+netty:
+  default:
+    allocator:
+      max-order: 3
+vertx:
+  pg:
+    client:
+      port: 5432
+      host: localhost
+      database: ocho
+      user: mgb
+      password: '12345'
+      maxSize: 5
