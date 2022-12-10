@@ -1,9 +1,4 @@
-
-package org.lonpe.model;            
-
-            
-
-         
+package org.lonpe.model;
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -13,80 +8,74 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;  
-
-
+import javax.validation.constraints.NotNull;
 
 @Introspected
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "me_usr_interface_in_pkey_idx")})
-public class MeUsrInterface implements IDcLon,Serializable{
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkey"}, name = "me_usr_interface_in_pkey_idx")})
+public class MeUsrInterface implements IDcLon, Serializable {
 
-    public MeUsrInterface(){
+    public MeUsrInterface() {
     }
 
     @Id
     @GeneratedValue(generator = "seq_me_usr_interface")
     private Long id;
-      
-    public Long getId(){
+
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @NotBlank 
+    @NotBlank
     @NotNull
     private String pkey;
 
-    public String getPkey(){
+    public String getPkey() {
         return this.pkey;
     }
 
-    public void setPkey(String pkey){
+    public void setPkey(String pkey) {
         this.pkey = pkey;
     }
 
-
-    
-        @NotBlank
-    @NotNull    
+    @NotBlank
+    @NotNull
     private String dc;
 
-    public String getDc(){
+    public String getDc() {
         return this.dc;
     }
 
-    public void setDc(String dc){
+    public void setDc(String dc) {
         this.dc = dc;
-    }        
-    
+    }
 
-        @NotBlank
-    @NotNull    
+    @NotBlank
+    @NotNull
     private String label;
 
-    public String getLabel(){
+    public String getLabel() {
         return this.label;
     }
 
-    public void setLabel(String label){
+    public void setLabel(String label) {
         this.label = label;
-    }        
-    
+    }
 
-        @NotNull    
+    @NotNull
     private Integer level;
 
-    public Integer getLevel(){
+    public Integer getLevel() {
         return this.level;
     }
 
-    public void setLevel(Integer level){
+    public void setLevel(Integer level) {
         this.level = level;
-    }        
-    
-      
+    }
+
 }
-        

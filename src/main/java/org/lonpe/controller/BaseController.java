@@ -1,8 +1,5 @@
+package org.lonpe.controller;
 
-        
-package org.lonpe.controller;            
-
-            
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -26,31 +23,29 @@ import org.lonpe.forquery.ObjForQuery;
 import org.lonpe.model.*;
 import org.lonpe.lonrx.impl.BaseServiceLon;
 
-
-
-@Secured("isAuthenticated()") 
+@Secured("isAuthenticated()")
 @Controller("/pg/base")
-public class BaseController extends AbstractLonController<Base>{
+public class BaseController extends AbstractLonController<Base> {
 
     @Inject
     BaseServiceLon baseServiceLon;
 
-    @Get(uri="/t", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<Base>> t(final Authentication authentication,final HttpRequest request) {    
-         final Base base = new Base();            
-         return Mono.just(base).map(e -> HttpResponse.ok(e));        
-    }  
+    @Get(uri = "/t", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<Base>> t(final Authentication authentication, final HttpRequest request) {
+        final Base base = new Base();
+        return Mono.just(base).map(e -> HttpResponse.ok(e));
+    }
 
-    @Get(uri="/model", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication,final HttpRequest request) {        
-         return Mono.just(baseServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));        
-    }  
+    @Get(uri = "/model", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication, final HttpRequest request) {
+        return Mono.just(baseServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));
+    }
 
-    @Get(uri="/l", produces = MediaType.APPLICATION_JSON)
-    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {        
-        final ObjForQuery ofq = doObjForQuery(authentication, request);     
-        return convert(baseServiceLon.doList(ofq));    
-    }   
+    @Get(uri = "/l", produces = MediaType.APPLICATION_JSON)
+    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {
+        final ObjForQuery ofq = doObjForQuery(authentication, request);
+        return convert(baseServiceLon.doList(ofq));
+    }
 
     @Put(uri = "/sou", produces = MediaType.APPLICATION_JSON)
     public Publisher<HttpResponse<Map<String, Object>>> sou(final Authentication authentication, final @Body @Valid Base base) {
@@ -66,18 +61,13 @@ public class BaseController extends AbstractLonController<Base>{
     }
 
     private Publisher<HttpResponse<Map<String, Object>>> verifySave(final Authentication authentication, final Base base) {
-        
+
         final Map<String, Object> attrs = authentication.getAttributes();
         final String typelon = (String) attrs.get("TYPELON");
         final Long uid = (Long) attrs.get("ID");
 
         return processSave(baseServiceLon.save(base));
 
-     }
-
-
+    }
 
 }
-
-
-        

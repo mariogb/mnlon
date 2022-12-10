@@ -41,13 +41,10 @@ public class Application implements ApplicationEventListener<ServerStartupEvent>
                 + "          ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝             \n"
                 + "                                                              ";
 
-        
-        
         System.out.println(m);
 
-        
-        System.out.println("INICIANDO EN PUERTO "+event.getSource().getPort());
-        
+        System.out.println("INICIANDO EN PUERTO " + event.getSource().getPort());
+
         Single<Map<String, Object>> one = crudLon.getOne("Select * from user_lon where username = 'admin'", Tuple.tuple());
 
         Single<Map<String, Object>> two = one.flatMap((Map<String, Object> t) -> {
@@ -102,10 +99,8 @@ public class Application implements ApplicationEventListener<ServerStartupEvent>
                 return crudLon.executeQry(sql_dd, Tuple.tuple());
             }
         });
-        
+
         two.subscribe();
-        
-        
 
     }
 

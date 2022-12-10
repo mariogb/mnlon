@@ -16,14 +16,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class PasswordEncoder {
 
     BCryptPasswordEncoder b = new BCryptPasswordEncoder();
-    
-    public String encode(String s){
+
+    public String encode(String s) {
         return b.encode(s);
     }
-    
-    public boolean matches(String rawPassword, String encodedPassword){
+
+    public boolean matches(String rawPassword, String encodedPassword) {
         return b.matches(rawPassword, encodedPassword);
     }
-    
 
 }

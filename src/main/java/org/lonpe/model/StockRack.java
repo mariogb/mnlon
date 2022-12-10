@@ -1,9 +1,6 @@
+package org.lonpe.model;
 
-package org.lonpe.model;            
-
-            
 import java.util.Set;
-         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -13,97 +10,89 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;  
+import javax.validation.constraints.NotNull;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
-
 @Introspected
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "stock_rack_in_pkey_idx")})
-public class StockRack implements IDcLon,Serializable{
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkey"}, name = "stock_rack_in_pkey_idx")})
+public class StockRack implements IDcLon, Serializable {
 
-    public StockRack(){
+    public StockRack() {
     }
 
     @Id
     @GeneratedValue(generator = "seq_stock_rack")
     private Long id;
-      
-    public Long getId(){
+
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @NotBlank 
+    @NotBlank
     @NotNull
     private String pkey;
 
-    public String getPkey(){
+    public String getPkey() {
         return this.pkey;
     }
 
-    public void setPkey(String pkey){
+    public void setPkey(String pkey) {
         this.pkey = pkey;
     }
 
-
-    
-        @NotBlank    
+    @NotBlank
     private String fastKey;
 
-    public String getFastKey(){
+    public String getFastKey() {
         return this.fastKey;
     }
 
-    public void setFastKey(String fastKey){
+    public void setFastKey(String fastKey) {
         this.fastKey = fastKey;
-    }        
-    
+    }
 
-        @NotBlank
-    @NotNull    
+    @NotBlank
+    @NotNull
     private String pname;
 
-    public String getPname(){
+    public String getPname() {
         return this.pname;
     }
 
-    public void setPname(String pname){
+    public void setPname(String pname) {
         this.pname = pname;
-    }        
-    
+    }
 
-    
     @NotNull
-    @ManyToOne    
+    @ManyToOne
     private WorkSpace workSpace;
 
-    public WorkSpace getWorkSpace(){
+    public WorkSpace getWorkSpace() {
         return this.workSpace;
     }
-    
-    public void setWorkSpace(WorkSpace workSpace){
+
+    public void setWorkSpace(WorkSpace workSpace) {
         this.workSpace = workSpace;
     }
- 
 
-    
     @OneToMany
-    @JoinColumn(name = "stock_rack_id")    
+    @JoinColumn(name = "stock_rack_id")
     private Set<StockRackProduct> stockRackProducts;
 
-    public Set<StockRackProduct> getStockRackProducts(){
+    public Set<StockRackProduct> getStockRackProducts() {
         return this.stockRackProducts;
     }
-    
-    public void setStockRackProducts(Set<StockRackProduct> stockRackProducts){
+
+    public void setStockRackProducts(Set<StockRackProduct> stockRackProducts) {
         this.stockRackProducts = stockRackProducts;
     }
- 
-      
+
 }
-        

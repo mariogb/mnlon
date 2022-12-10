@@ -1,9 +1,6 @@
+package org.lonpe.model;
 
-package org.lonpe.model;            
-
-            
 import java.util.Set;
-         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -13,86 +10,77 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;  
+import javax.validation.constraints.NotNull;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-
 @Introspected
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "airport_in_pkey_idx")})
-public class Airport implements IDcLon,Serializable{
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkey"}, name = "airport_in_pkey_idx")})
+public class Airport implements IDcLon, Serializable {
 
-    public Airport(){
+    public Airport() {
     }
 
     @Id
     @GeneratedValue(generator = "seq_airport")
     private Long id;
-      
-    public Long getId(){
+
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @NotBlank 
+    @NotBlank
     @NotNull
     private String pkey;
 
-    public String getPkey(){
+    public String getPkey() {
         return this.pkey;
     }
 
-    public void setPkey(String pkey){
+    public void setPkey(String pkey) {
         this.pkey = pkey;
     }
 
-
-    
-        @NotBlank
-    @NotNull    
+    @NotBlank
+    @NotNull
     private String pname;
 
-    public String getPname(){
+    public String getPname() {
         return this.pname;
     }
 
-    public void setPname(String pname){
+    public void setPname(String pname) {
         this.pname = pname;
-    }        
-    
+    }
 
-    
-
-    
     @OneToMany
-    @JoinColumn(name = "to_airport_id")    
+    @JoinColumn(name = "to_airport_id")
     private Set<Fligth> inCommingFligths;
 
-    public Set<Fligth> getInCommingFligths(){
+    public Set<Fligth> getInCommingFligths() {
         return this.inCommingFligths;
     }
-    
-    public void setInCommingFligths(Set<Fligth> inCommingFligths){
+
+    public void setInCommingFligths(Set<Fligth> inCommingFligths) {
         this.inCommingFligths = inCommingFligths;
     }
- 
-
 
     @OneToMany
-    @JoinColumn(name = "from_airport_id")    
+    @JoinColumn(name = "from_airport_id")
     private Set<Fligth> outCommingFligths;
 
-    public Set<Fligth> getOutCommingFligths(){
+    public Set<Fligth> getOutCommingFligths() {
         return this.outCommingFligths;
     }
-    
-    public void setOutCommingFligths(Set<Fligth> outCommingFligths){
+
+    public void setOutCommingFligths(Set<Fligth> outCommingFligths) {
         this.outCommingFligths = outCommingFligths;
     }
- 
-      
+
 }
-        

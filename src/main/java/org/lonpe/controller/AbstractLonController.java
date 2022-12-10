@@ -34,20 +34,18 @@ import reactor.core.publisher.Mono;
 public abstract class AbstractLonController<DC> {
 
     private final HttpsParamsToQrys httpsParamsToQrys = new HttpsParamsToQrys();
-    
+
     public Publisher<HttpResponse<Map<String, Object>>> processSave(Single<Map<String, Object>> ss) {
 
         return RxJava2Adapter.singleToMono(ss).map(e -> {
             return HttpResponse.ok(e);
         });
     }
-    
+
     public Mono<Map<String, Object>> convert(Single<Map<String, Object>> ss) {
 
         return RxJava2Adapter.singleToMono(ss);
     }
-    
-    
 
     @io.micronaut.http.annotation.Error(exception = IOException.class)
     public Map<String, Object> onIOException(HttpRequest request, IOException ex) {
@@ -65,7 +63,7 @@ public abstract class AbstractLonController<DC> {
     }
 
     public ObjForQuery doObjForQuery(Authentication authentication, HttpRequest request) {
-       
+
         return httpsParamsToQrys.doObjForQuery(authentication, request);
     }
 ////    @Inject
@@ -136,32 +134,7 @@ public abstract class AbstractLonController<DC> {
 ////
 ////    }
 ////    
-//    
-////    private ObjForQuery doObjForQuery0(final Map<String, Object> attributes ,Map<String, List<String>> params){
-////        
-////    }
-////    
-//    
-//    public ObjForQuery doObjForQuery(Authentication authentication, HttpRequest request) {
-//       
-//        return httpsParamsToQrys.doObjForQuery(authentication, request);
-////        final HttpParameters parameters = request.getParameters();
-////        final Map<String, List<String>> params = parameters.asMap();
-////        final Long max = doMax(parameters);
-////        final Long offset = doOffset(parameters);
-////        final Map<String, Object> attributes = authentication.getAttributes();
-////        final String typelon = (String) attributes.get("TYPELON");
-////        if (!typelon.equals("ADM")) {
-////
-////            applyCont00(attributes, params, "base");
-////            applyCont00(attributes, params, "departament");
-////            List<String> luu = new ArrayList<>(1);
-////            luu.add(attributes.get("ID").toString());
-////            params.put("userLon_id", luu);
-////        }
-////        return   new ObjForQuery(params, max, offset, withCount(parameters));
-//
-//    }
+
 //
 //
 ////    public ObjForQuery doObjForQuer_yParams(Authentication authentication, HttpRequest request) {

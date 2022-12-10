@@ -1,8 +1,5 @@
+package org.lonpe.controller;
 
-        
-package org.lonpe.controller;            
-
-            
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -26,31 +23,29 @@ import org.lonpe.forquery.ObjForQuery;
 import org.lonpe.model.*;
 import org.lonpe.lonrx.impl.PaymentInTypeServiceLon;
 
-
-
-@Secured("isAuthenticated()") 
+@Secured("isAuthenticated()")
 @Controller("/pg/paymentInType")
-public class PaymentInTypeController extends AbstractLonController<PaymentInType>{
+public class PaymentInTypeController extends AbstractLonController<PaymentInType> {
 
     @Inject
     PaymentInTypeServiceLon paymentInTypeServiceLon;
 
-    @Get(uri="/t", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<PaymentInType>> t(final Authentication authentication,final HttpRequest request) {    
-         final PaymentInType paymentInType = new PaymentInType();            
-         return Mono.just(paymentInType).map(e -> HttpResponse.ok(e));        
-    }  
+    @Get(uri = "/t", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<PaymentInType>> t(final Authentication authentication, final HttpRequest request) {
+        final PaymentInType paymentInType = new PaymentInType();
+        return Mono.just(paymentInType).map(e -> HttpResponse.ok(e));
+    }
 
-    @Get(uri="/model", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication,final HttpRequest request) {        
-         return Mono.just(paymentInTypeServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));        
-    }  
+    @Get(uri = "/model", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication, final HttpRequest request) {
+        return Mono.just(paymentInTypeServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));
+    }
 
-    @Get(uri="/l", produces = MediaType.APPLICATION_JSON)
-    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {        
-        final ObjForQuery ofq = doObjForQuery(authentication, request);     
-        return convert(paymentInTypeServiceLon.doList(ofq));    
-    }   
+    @Get(uri = "/l", produces = MediaType.APPLICATION_JSON)
+    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {
+        final ObjForQuery ofq = doObjForQuery(authentication, request);
+        return convert(paymentInTypeServiceLon.doList(ofq));
+    }
 
     @Put(uri = "/sou", produces = MediaType.APPLICATION_JSON)
     public Publisher<HttpResponse<Map<String, Object>>> sou(final Authentication authentication, final @Body @Valid PaymentInType paymentInType) {
@@ -66,18 +61,13 @@ public class PaymentInTypeController extends AbstractLonController<PaymentInType
     }
 
     private Publisher<HttpResponse<Map<String, Object>>> verifySave(final Authentication authentication, final PaymentInType paymentInType) {
-        
+
         final Map<String, Object> attrs = authentication.getAttributes();
         final String typelon = (String) attrs.get("TYPELON");
         final Long uid = (Long) attrs.get("ID");
 
         return processSave(paymentInTypeServiceLon.save(paymentInType));
 
-     }
-
-
+    }
 
 }
-
-
-        

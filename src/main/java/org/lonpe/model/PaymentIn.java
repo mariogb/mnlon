@@ -1,9 +1,4 @@
-
-package org.lonpe.model;            
-
-            
-
-         
+package org.lonpe.model;
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -13,72 +8,64 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;  
+import javax.validation.constraints.NotNull;
 import javax.persistence.ManyToOne;
-
 
 @Introspected
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "payment_in_in_pkey_idx")})
-public class PaymentIn implements IDcLon,Serializable{
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkey"}, name = "payment_in_in_pkey_idx")})
+public class PaymentIn implements IDcLon, Serializable {
 
-    public PaymentIn(){
+    public PaymentIn() {
     }
 
     @Id
     @GeneratedValue(generator = "seq_payment_in")
     private Long id;
-      
-    public Long getId(){
+
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @NotBlank 
+    @NotBlank
     @NotNull
     private String pkey;
 
-    public String getPkey(){
+    public String getPkey() {
         return this.pkey;
     }
 
-    public void setPkey(String pkey){
+    public void setPkey(String pkey) {
         this.pkey = pkey;
     }
 
-
-    
-
-    
     @NotNull
-    @ManyToOne    
+    @ManyToOne
     private PaymentInForm paymentInForm;
 
-    public PaymentInForm getPaymentInForm(){
+    public PaymentInForm getPaymentInForm() {
         return this.paymentInForm;
     }
-    
-    public void setPaymentInForm(PaymentInForm paymentInForm){
+
+    public void setPaymentInForm(PaymentInForm paymentInForm) {
         this.paymentInForm = paymentInForm;
     }
- 
 
     @NotNull
-    @ManyToOne    
+    @ManyToOne
     private ComercialDocumentIn comercialDocumentIn;
 
-    public ComercialDocumentIn getComercialDocumentIn(){
+    public ComercialDocumentIn getComercialDocumentIn() {
         return this.comercialDocumentIn;
     }
-    
-    public void setComercialDocumentIn(ComercialDocumentIn comercialDocumentIn){
+
+    public void setComercialDocumentIn(ComercialDocumentIn comercialDocumentIn) {
         this.comercialDocumentIn = comercialDocumentIn;
     }
- 
 
-    
-      
 }
-        

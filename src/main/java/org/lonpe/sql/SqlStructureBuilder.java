@@ -130,7 +130,7 @@ public class SqlStructureBuilder {
         final Set<String> l00 = new HashSet<>();
         l00.addAll(relations);
         l00.addAll(condiciones);
-        
+
         StringBuilder sql0 = new StringBuilder("SELECT ");
         sql0.append(fields.stream().collect(Collectors.joining(", ")));
         sql0.append(" FROM ");

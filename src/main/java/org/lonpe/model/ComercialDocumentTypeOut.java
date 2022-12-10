@@ -1,9 +1,6 @@
+package org.lonpe.model;
 
-package org.lonpe.model;            
-
-            
 import java.util.Set;
-         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -13,85 +10,77 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;  
+import javax.validation.constraints.NotNull;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-
 @Introspected
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "comercial_document_type_out_in_pkey_idx")})
-public class ComercialDocumentTypeOut implements IDcLon,Serializable{
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkey"}, name = "comercial_document_type_out_in_pkey_idx")})
+public class ComercialDocumentTypeOut implements IDcLon, Serializable {
 
-    public ComercialDocumentTypeOut(){
+    public ComercialDocumentTypeOut() {
     }
 
     @Id
     @GeneratedValue(generator = "seq_comercial_document_type_out")
     private Long id;
-      
-    public Long getId(){
+
+    public Long getId() {
         return this.id;
     }
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @NotBlank 
+    @NotBlank
     @NotNull
     private String pkey;
 
-    public String getPkey(){
+    public String getPkey() {
         return this.pkey;
     }
 
-    public void setPkey(String pkey){
+    public void setPkey(String pkey) {
         this.pkey = pkey;
     }
 
-
-    
-        @NotBlank
-    @NotNull    
+    @NotBlank
+    @NotNull
     private String afectStock;
 
-    public String getAfectStock(){
+    public String getAfectStock() {
         return this.afectStock;
     }
 
-    public void setAfectStock(String afectStock){
+    public void setAfectStock(String afectStock) {
         this.afectStock = afectStock;
-    }        
-    
+    }
 
-        @NotBlank
-    @NotNull    
+    @NotBlank
+    @NotNull
     private String pname;
 
-    public String getPname(){
+    public String getPname() {
         return this.pname;
     }
 
-    public void setPname(String pname){
+    public void setPname(String pname) {
         this.pname = pname;
-    }        
-    
+    }
 
-    
-
-    
     @OneToMany
-    @JoinColumn(name = "comercial_document_type_id")    
+    @JoinColumn(name = "comercial_document_type_id")
     private Set<ComercialDocumentOut> comercialDocuments;
 
-    public Set<ComercialDocumentOut> getComercialDocuments(){
+    public Set<ComercialDocumentOut> getComercialDocuments() {
         return this.comercialDocuments;
     }
-    
-    public void setComercialDocuments(Set<ComercialDocumentOut> comercialDocuments){
+
+    public void setComercialDocuments(Set<ComercialDocumentOut> comercialDocuments) {
         this.comercialDocuments = comercialDocuments;
     }
- 
-      
+
 }
-        

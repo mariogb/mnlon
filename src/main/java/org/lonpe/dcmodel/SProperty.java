@@ -11,6 +11,7 @@ import java.util.List;
  * @author mario
  */
 public class SProperty {
+
     private String n;
     private String t;
     private Boolean rq = true;
@@ -20,18 +21,17 @@ public class SProperty {
     private Integer min;
     private Integer max;
     private Boolean withIndex;
-    
 
     public SProperty(String n, String t) {
         this.n = n;
         this.t = t;
     }
 
-    public SProperty(String n, String t,Boolean rq, Boolean uq) {
+    public SProperty(String n, String t, Boolean rq, Boolean uq) {
         this.n = n;
         this.t = t;
         this.rq = rq;
-        this.uq = uq;       
+        this.uq = uq;
     }
 
     /**
@@ -159,9 +159,5 @@ public class SProperty {
     public void setWithIndex(Boolean withIndex) {
         this.withIndex = withIndex;
     }
-    
-    
-    
-    
-    
+
 }

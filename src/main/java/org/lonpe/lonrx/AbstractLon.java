@@ -90,9 +90,8 @@ public abstract class AbstractLon<DC> {
 
         final Tuple tuple = Tuple.tuple();
 
-        
         ConditionInfo ci = doCondiciones(objForQuery.getParams(), tuple);
-        
+
         final String ord2 = ci.getOrden();
         final String sqlConds = ci.getCondiciones().stream().collect(Collectors.joining(" AND "));
         String sqlConds00 = doSqlConds00(sqlConds);

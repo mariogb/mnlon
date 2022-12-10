@@ -25,7 +25,7 @@ public final class SqlLonConditionsBuilder {
     private String orden = "id";
     final Map<String, String> sorts;
 
-    public SqlLonConditionsBuilder(final Map<String, List<String>> params, Map<String, String> sorts,Tuple tuple) {
+    public SqlLonConditionsBuilder(final Map<String, List<String>> params, Map<String, String> sorts, Tuple tuple) {
         this.condiciones = new LinkedHashSet<>();
         this.params = params;
         this.tuple = tuple;

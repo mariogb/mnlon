@@ -94,13 +94,13 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
                     }
 
                     emitter.success(AuthenticationResponse.success("user", roles, attrs));
-                    
+
                 }, (Throwable t) -> {
 
                     emitter.error(t);
                 });
-                
-                System.out.println("Esta en estado"+subscribe.isDisposed());
+
+                System.out.println("Esta en estado" + subscribe.isDisposed());
                 //
             }
 

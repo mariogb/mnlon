@@ -1,8 +1,5 @@
+package org.lonpe.controller;
 
-        
-package org.lonpe.controller;            
-
-            
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -26,31 +23,29 @@ import org.lonpe.forquery.ObjForQuery;
 import org.lonpe.model.*;
 import org.lonpe.lonrx.impl.ProgramServiceLon;
 
-
-
-@Secured("isAuthenticated()") 
+@Secured("isAuthenticated()")
 @Controller("/pg/program")
-public class ProgramController extends AbstractLonController<Program>{
+public class ProgramController extends AbstractLonController<Program> {
 
     @Inject
     ProgramServiceLon programServiceLon;
 
-    @Get(uri="/t", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<Program>> t(final Authentication authentication,final HttpRequest request) {    
-         final Program program = new Program();            
-         return Mono.just(program).map(e -> HttpResponse.ok(e));        
-    }  
+    @Get(uri = "/t", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<Program>> t(final Authentication authentication, final HttpRequest request) {
+        final Program program = new Program();
+        return Mono.just(program).map(e -> HttpResponse.ok(e));
+    }
 
-    @Get(uri="/model", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication,final HttpRequest request) {        
-         return Mono.just(programServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));        
-    }  
+    @Get(uri = "/model", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication, final HttpRequest request) {
+        return Mono.just(programServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));
+    }
 
-    @Get(uri="/l", produces = MediaType.APPLICATION_JSON)
-    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {        
-        final ObjForQuery ofq = doObjForQuery(authentication, request);     
-        return convert(programServiceLon.doList(ofq));    
-    }   
+    @Get(uri = "/l", produces = MediaType.APPLICATION_JSON)
+    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {
+        final ObjForQuery ofq = doObjForQuery(authentication, request);
+        return convert(programServiceLon.doList(ofq));
+    }
 
     @Put(uri = "/sou", produces = MediaType.APPLICATION_JSON)
     public Publisher<HttpResponse<Map<String, Object>>> sou(final Authentication authentication, final @Body @Valid Program program) {
@@ -66,18 +61,13 @@ public class ProgramController extends AbstractLonController<Program>{
     }
 
     private Publisher<HttpResponse<Map<String, Object>>> verifySave(final Authentication authentication, final Program program) {
-        
+
         final Map<String, Object> attrs = authentication.getAttributes();
         final String typelon = (String) attrs.get("TYPELON");
         final Long uid = (Long) attrs.get("ID");
 
         return processSave(programServiceLon.save(program));
 
-     }
-
-
+    }
 
 }
-
-
-        

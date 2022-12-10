@@ -13,7 +13,7 @@ import java.util.Map;
  * @author l5
  */
 public class ObjForQuery {
-    
+
     private Map<String, List<String>> params;
     private Long max;
     private Long offset;
@@ -81,8 +81,5 @@ public class ObjForQuery {
     public void setWithCount(boolean withCount) {
         this.withCount = withCount;
     }
-    
-    
-    
-    
+
 }

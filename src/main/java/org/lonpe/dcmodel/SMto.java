@@ -9,21 +9,22 @@ package org.lonpe.dcmodel;
  * @author mario
  */
 public class SMto {
+
     private String n;
     private String t;
     private String pc;
     private String setBySys;
     private String onForm;
     private String from;
-    
 
     public SMto(String n, String t) {
         this.n = n;
         this.t = t;
     }
+
     public SMto(String n, String t, String from) {
         this.n = n;
-        this.t = t;        
+        this.t = t;
         this.from = from;
     }
 
@@ -111,8 +112,4 @@ public class SMto {
         this.from = from;
     }
 
-
-    
-    
-    
 }

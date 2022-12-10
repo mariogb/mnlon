@@ -15,11 +15,12 @@ import org.lonpe.model.Account;
 import org.lonpe.sql.ConditionInfo;
 import org.lonpe.sql.SqlStructureBuilder;
 import org.lonpe.model.IDcLon;
+
 /**
  *
  * @author mgb
  */
-public interface IServiceLon<T>{
+public interface IServiceLon<T> {
 
     ConditionInfo doCondiciones(final Map<String, List<String>> params, Tuple tuple);
 
@@ -30,7 +31,6 @@ public interface IServiceLon<T>{
     String getSqlForList();
 
     //SqlStructureBuilder getSqlStructureBuiderLon();
-
     /**
      * @return the dCModel
      */

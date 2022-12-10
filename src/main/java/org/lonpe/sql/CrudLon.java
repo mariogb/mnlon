@@ -155,7 +155,7 @@ public class CrudLon {
     }
 
     public Single<Map<String, Object>> doListAndNames(String sql, Tuple t, Set<String> names, Long offset, Long max) {
-        return doList(sql, t,false)
+        return doList(sql, t, false)
                 .map((Map<String, Object> m1) -> {
                     //m1.remove("colnames");
                     m1.put("names", names);
