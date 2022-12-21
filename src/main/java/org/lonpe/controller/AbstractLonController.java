@@ -66,6 +66,14 @@ public abstract class AbstractLonController<DC> {
 
         return httpsParamsToQrys.doObjForQuery(authentication, request);
     }
+    
+    
+    public String doPreSql(String typelon) {
+        if (!typelon.equals("ADM")) {
+            return "select rest_dpbtp.dbtp_id from rest_dpbtp where rest_dpbtp.uid = $2";
+        }
+        return "select rest_dpbtp00.dbtp_id from rest_dpbtp00";
+    }
 ////    @Inject
 ////    EntityPermisionRolePgLon entityPermisionRolePgLon;
 //    
