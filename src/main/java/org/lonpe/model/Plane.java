@@ -1,6 +1,9 @@
-package org.lonpe.model;
 
+package org.lonpe.model;            
+
+            
 import java.util.Set;
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -10,101 +13,110 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
+
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "plane_in_pkey_idx")})
-public class Plane implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "plane_in_pkey_idx")})
+public class Plane implements IDcLon,Serializable{
 
-    public Plane() {
+    public Plane(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_plane")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
-    @NotBlank
-    @NotNull
+
+    
+        @NotBlank
+    @NotNull    
     private String plate;
 
-    public String getPlate() {
+    public String getPlate(){
         return this.plate;
     }
 
-    public void setPlate(String plate) {
+    public void setPlate(String plate){
         this.plate = plate;
-    }
+    }        
+    
 
-    @NotBlank
-    @NotNull
+        @NotBlank
+    @NotNull    
     private String pname;
 
-    public String getPname() {
+    public String getPname(){
         return this.pname;
     }
 
-    public void setPname(String pname) {
+    public void setPname(String pname){
         this.pname = pname;
-    }
+    }        
+    
 
-    @NotNull
+        @NotNull    
     private Integer seats;
 
-    public Integer getSeats() {
+    public Integer getSeats(){
         return this.seats;
     }
 
-    public void setSeats(Integer seats) {
+    public void setSeats(Integer seats){
         this.seats = seats;
-    }
+    }        
+    
 
+    
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private AirCompany laCompania;
 
-    public AirCompany getLaCompania() {
+    public AirCompany getLaCompania(){
         return this.laCompania;
     }
-
-    public void setLaCompania(AirCompany laCompania) {
+    
+    public void setLaCompania(AirCompany laCompania){
         this.laCompania = laCompania;
     }
+ 
 
+    
     @OneToMany
-    @JoinColumn(name = "plane_id")
+    @JoinColumn(name = "plane_id")    
     private Set<Fligth> fligths;
 
-    public Set<Fligth> getFligths() {
+    public Set<Fligth> getFligths(){
         return this.fligths;
     }
-
-    public void setFligths(Set<Fligth> fligths) {
+    
+    public void setFligths(Set<Fligth> fligths){
         this.fligths = fligths;
     }
-
+ 
+      
 }
+        

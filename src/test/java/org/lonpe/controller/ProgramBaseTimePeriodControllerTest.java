@@ -71,7 +71,7 @@ public class ProgramBaseTimePeriodControllerTest extends AbstractControllerTest<
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/programBaseTimePeriod/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/programBaseTimePeriod").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);

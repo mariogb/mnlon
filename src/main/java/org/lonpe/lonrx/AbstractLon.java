@@ -9,6 +9,7 @@ import io.micronaut.http.HttpParameters;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.vertx.reactivex.sqlclient.Tuple;
+import jakarta.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,9 @@ import org.lonpe.sql.SqlStructureBuilder;
  * @param <DC>
  */
 public abstract class AbstractLon<DC> {
+
+    @Inject
+    CrudLon crudLon;
 
     protected static final String STRING = "String";
     protected static final String LONG = "Long";
@@ -84,7 +88,11 @@ public abstract class AbstractLon<DC> {
     public abstract Set<String> getNames();
 
     // abstract protected SqlStructureBuilder getSqlStructureBuiderLon();
-    protected Single<Map<String, Object>> doList000(final CrudLon crudLon, final String dc, final ObjForQuery objForQuery) {
+    protected Single<Map<String, Object>> save00(String sqlInsert, Tuple tuple, Map<String, String> insertReturnMapFields) {
+        return crudLon.saveOneWithNames(sqlInsert, tuple, insertReturnMapFields);
+    }
+
+    protected Single<Map<String, Object>> doList000(final String dc, final ObjForQuery objForQuery) {
 
         Single<Map<String, Object>> rfinal;
 

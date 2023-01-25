@@ -119,4 +119,19 @@ public class Application implements ApplicationEventListener<ServerStartupEvent>
         return u;
     }
 
+    private UserLon doSubAdm() {
+        final UserLon u = new UserLon();
+        u.setPkey("SADM");
+        u.setPname("SADM");
+        u.setPassword(passwordEncoder.encode("1234"));
+        u.setUsername("sadmin");
+        // u.setAccountExpired(false);
+        // u.setAccountLocked(false);
+        u.setTypeLon("SADM");
+        // u.setPasswordExpired(false);
+        u.setEnabled(true);
+        u.setEmail("mario2.garcia.burgos@gmail.com");
+        return u;
+    }
+
 }

@@ -1,5 +1,8 @@
-package org.lonpe.controller;
 
+        
+package org.lonpe.controller;            
+
+            
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
@@ -8,6 +11,7 @@ import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.Post;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.authentication.Authentication;
 import io.reactivex.Single;
@@ -23,31 +27,33 @@ import org.lonpe.forquery.ObjForQuery;
 import org.lonpe.model.*;
 import org.lonpe.lonrx.impl.DepartamentBaseTimePeriodServiceLon;
 
-@Secured("isAuthenticated()")
+
+
+@Secured("isAuthenticated()") 
 @Controller("/pg/departamentBaseTimePeriod")
-public class DepartamentBaseTimePeriodController extends AbstractLonController<DepartamentBaseTimePeriod> {
+public class DepartamentBaseTimePeriodController extends AbstractLonController<DepartamentBaseTimePeriod>{
 
     @Inject
     DepartamentBaseTimePeriodServiceLon departamentBaseTimePeriodServiceLon;
 
-    @Get(uri = "/t", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<DepartamentBaseTimePeriod>> t(final Authentication authentication, final HttpRequest request) {
-        final DepartamentBaseTimePeriod departamentBaseTimePeriod = new DepartamentBaseTimePeriod();
-        return Mono.just(departamentBaseTimePeriod).map(e -> HttpResponse.ok(e));
-    }
+    @Get(uri="/t", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<DepartamentBaseTimePeriod>> t(final Authentication authentication,final HttpRequest request) {    
+         final DepartamentBaseTimePeriod departamentBaseTimePeriod = new DepartamentBaseTimePeriod();            
+         return Mono.just(departamentBaseTimePeriod).map(e -> HttpResponse.ok(e));        
+    }  
 
-    @Get(uri = "/model", produces = MediaType.APPLICATION_JSON)
-    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication, final HttpRequest request) {
-        return Mono.just(departamentBaseTimePeriodServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));
-    }
+    @Get(uri="/model", produces = MediaType.APPLICATION_JSON)
+    public Publisher<HttpResponse<DCModel>> model(final Authentication authentication,final HttpRequest request) {        
+         return Mono.just(departamentBaseTimePeriodServiceLon.getdCModel()).map(e -> HttpResponse.ok(e));        
+    }  
 
-    @Get(uri = "/l", produces = MediaType.APPLICATION_JSON)
-    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {
-        final ObjForQuery ofq = doObjForQuery(authentication, request);
-        return convert(departamentBaseTimePeriodServiceLon.doList(ofq));
-    }
+    @Get(produces = MediaType.APPLICATION_JSON)
+    public Mono<Map<String, Object>> l(final Authentication authentication, final HttpRequest request) {        
+        final ObjForQuery ofq = doObjForQuery(authentication, request);     
+        return convert(departamentBaseTimePeriodServiceLon.doList(ofq));    
+    }   
 
-    @Put(uri = "/sou", produces = MediaType.APPLICATION_JSON)
+    @Post(produces = MediaType.APPLICATION_JSON)
     public Publisher<HttpResponse<Map<String, Object>>> sou(final Authentication authentication, final @Body @Valid DepartamentBaseTimePeriod departamentBaseTimePeriod) {
         System.out.println("Recibido " + departamentBaseTimePeriod);
 
@@ -57,17 +63,21 @@ public class DepartamentBaseTimePeriodController extends AbstractLonController<D
        }
          */
         return verifySave(authentication, departamentBaseTimePeriod);
-
     }
 
     private Publisher<HttpResponse<Map<String, Object>>> verifySave(final Authentication authentication, final DepartamentBaseTimePeriod departamentBaseTimePeriod) {
-
+        
         final Map<String, Object> attrs = authentication.getAttributes();
         final String typelon = (String) attrs.get("TYPELON");
         final Long uid = (Long) attrs.get("ID");
 
         return processSave(departamentBaseTimePeriodServiceLon.save(departamentBaseTimePeriod));
 
-    }
+     }
+
+
 
 }
+
+
+        

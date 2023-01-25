@@ -1,4 +1,9 @@
-package org.lonpe.model;
+
+package org.lonpe.model;            
+
+            
+
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -8,87 +13,96 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.ManyToOne;
+
 
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "entity_permision_role_in_pkey_idx")})
-public class EntityPermisionRole implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "entity_permision_role_in_pkey_idx")})
+public class EntityPermisionRole implements IDcLon,Serializable{
 
-    public EntityPermisionRole() {
+    public EntityPermisionRole(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_entity_permision_role")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
-    @NotNull
+
+    
+        @NotNull    
     private Boolean enabled;
 
-    public Boolean getEnabled() {
+    public Boolean getEnabled(){
         return this.enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setEnabled(Boolean enabled){
         this.enabled = enabled;
-    }
+    }        
+    
 
-    @NotBlank
-    @NotNull
+        @NotBlank
+    @NotNull    
     private String nombre;
 
-    public String getNombre() {
+    public String getNombre(){
         return this.nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre){
         this.nombre = nombre;
-    }
+    }        
+    
 
-    @NotBlank
-    @NotNull
+        @NotBlank
+    @NotNull    
     private String permission;
 
-    public String getPermission() {
+    public String getPermission(){
         return this.permission;
     }
 
-    public void setPermission(String permission) {
+    public void setPermission(String permission){
         this.permission = permission;
-    }
+    }        
+    
 
+    
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private Role role;
 
-    public Role getRole() {
+    public Role getRole(){
         return this.role;
     }
-
-    public void setRole(Role role) {
+    
+    public void setRole(Role role){
         this.role = role;
     }
+ 
 
+    
+      
 }
+        

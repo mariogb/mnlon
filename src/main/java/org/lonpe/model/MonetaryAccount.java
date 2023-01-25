@@ -1,6 +1,9 @@
-package org.lonpe.model;
 
+package org.lonpe.model;            
+
+            
 import java.util.Set;
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -10,77 +13,114 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "monetary_account_in_pkey_idx")})
-public class MonetaryAccount implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "monetary_account_in_pkey_idx")})
+public class MonetaryAccount implements IDcLon,Serializable{
 
-    public MonetaryAccount() {
+    public MonetaryAccount(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_monetary_account")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
-    @NotBlank
-    @NotNull
+
+    
+        @NotBlank
+    @NotNull    
     private String pname;
 
-    public String getPname() {
+    public String getPname(){
         return this.pname;
     }
 
-    public void setPname(String pname) {
+    public void setPname(String pname){
         this.pname = pname;
-    }
+    }        
+    
 
+    
+
+    
     @OneToMany
-    @JoinColumn(name = "monetary_account_id")
+    @JoinColumn(name = "out_account_id")    
     private Set<PaymentOut> paymentOuts;
 
-    public Set<PaymentOut> getPaymentOuts() {
+    public Set<PaymentOut> getPaymentOuts(){
         return this.paymentOuts;
     }
-
-    public void setPaymentOuts(Set<PaymentOut> paymentOuts) {
+    
+    public void setPaymentOuts(Set<PaymentOut> paymentOuts){
         this.paymentOuts = paymentOuts;
     }
+ 
+
 
     @OneToMany
-    @JoinColumn(name = "monetary_account_id")
+    @JoinColumn(name = "in_account_id")    
     private Set<PaymentIn> paymentIns;
 
-    public Set<PaymentIn> getPaymentIns() {
+    public Set<PaymentIn> getPaymentIns(){
         return this.paymentIns;
     }
-
-    public void setPaymentIns(Set<PaymentIn> paymentIns) {
+    
+    public void setPaymentIns(Set<PaymentIn> paymentIns){
         this.paymentIns = paymentIns;
     }
+ 
 
+
+    @OneToMany
+    @JoinColumn(name = "monetary_account_id")    
+    private Set<PaymentOutForm> paymentOutForms;
+
+    public Set<PaymentOutForm> getPaymentOutForms(){
+        return this.paymentOutForms;
+    }
+    
+    public void setPaymentOutForms(Set<PaymentOutForm> paymentOutForms){
+        this.paymentOutForms = paymentOutForms;
+    }
+ 
+
+
+    @OneToMany
+    @JoinColumn(name = "monetary_account_id")    
+    private Set<PaymentInForm> paymentInForms;
+
+    public Set<PaymentInForm> getPaymentInForms(){
+        return this.paymentInForms;
+    }
+    
+    public void setPaymentInForms(Set<PaymentInForm> paymentInForms){
+        this.paymentInForms = paymentInForms;
+    }
+ 
+      
 }
+        

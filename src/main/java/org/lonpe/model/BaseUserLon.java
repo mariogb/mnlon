@@ -1,4 +1,9 @@
-package org.lonpe.model;
+
+package org.lonpe.model;            
+
+            
+
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -8,64 +13,72 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.ManyToOne;
+
 
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "base_user_lon_in_pkey_idx")})
-public class BaseUserLon implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "base_user_lon_in_pkey_idx")})
+public class BaseUserLon implements IDcLon,Serializable{
 
-    public BaseUserLon() {
+    public BaseUserLon(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_base_user_lon")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
+
+    
+
+    
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private Base base;
 
-    public Base getBase() {
+    public Base getBase(){
         return this.base;
     }
-
-    public void setBase(Base base) {
+    
+    public void setBase(Base base){
         this.base = base;
     }
+ 
 
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private UserLon userLon;
 
-    public UserLon getUserLon() {
+    public UserLon getUserLon(){
         return this.userLon;
     }
-
-    public void setUserLon(UserLon userLon) {
+    
+    public void setUserLon(UserLon userLon){
         this.userLon = userLon;
     }
+ 
 
+    
+      
 }
+        

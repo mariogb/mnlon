@@ -1,6 +1,6 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.6.3"
+    id("io.micronaut.application") version "3.6.7"
     id("io.micronaut.test-resources") version "3.6.3"
 }
 
@@ -31,12 +31,12 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
     implementation "org.springframework.security:spring-security-crypto:5.2.4.RELEASE"
     implementation "io.projectreactor:reactor-core"
-    implementation 'io.projectreactor.addons:reactor-adapter:3.4.8'
+    //implementation 'io.projectreactor.addons:reactor-adapter:3.4.8'
     implementation 'commons-logging:commons-logging:1.2'
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation('io.micronaut:micronaut-runtime')
     // https://mvnrepository.com/artifact/io.projectreactor.addons/reactor-adapter
-implementation 'io.projectreactor.addons:reactor-adapter:3.5.0'
+    implementation 'io.projectreactor.addons:reactor-adapter:3.5.0'
 
 
 }
@@ -51,6 +51,7 @@ java {
 }
 
 graalvmNative.toolchainDetection = false
+
 micronaut {
     runtime("netty")
     testRuntime("junit5")

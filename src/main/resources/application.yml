@@ -1,27 +1,61 @@
 micronaut:
-  application:
-    name: mnlon
-  server:      
-      port: ${A5PORT:8123}    
-      cors:
-        enabled: true
-        configurations: 
+    application:
+        name: mnlon
+    server:      
+        port: ${A5PORT:8123}   
+        http-version: 2.0        
+        cors:
+          enabled: true
+          single-header: true            
+          configurations: 
             all:
-                maxAge: 3600
+              maxAge: 3550
+              allowCredentials: true   
+              allowedOrigins:                      
+               - 'https://localhost:8577'     
+              allowedMethods:                       
+                - OPTIONS
+                - POST
+                - PUT    
+                - GET
+                - DELETE
+                - PATCH                        
+              allowedHeaders:                                                                
+                - Authorization
+                - Content-Type
+                - Access-Control-Allow-Origin 
+                - Access-Control-Allow-Headers
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers  
+                - Origin
+                - Accept
+              exposedHeaders:
+                - Access-Control-Allow-Origin
+                - Access-Control-Allow-Headers
+                - Access-Control-Request-Method
+                - Access-Control-Request-Headers
+                - Origin
+                - Accept
+                - Cache-Control
+                - Content-Type
+                - Authorization                  
+                 
+                 
       
-  security:
-    authentication: bearer
-    endpoints:
-      login:
-          enabled: true      
-      logout:
-          enabled: true          
-    token:
-      jwt:
-        signatures:
-          secret:
-            generator:
-              secret: ${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}
+    security:
+        authentication: bearer
+        endpoints:
+            login:
+                enabled: true      
+            logout:
+                enabled: true          
+        token:
+            jwt:
+                signatures:
+                    secret:
+                        generator:
+                            secret: ${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}
+
 
 micronaut.http.client.http-version: 2.0
               
@@ -29,7 +63,7 @@ datasources:
   default:
     url: jdbc:postgresql://localhost:5432/ocho
     driverClassName: org.postgresql.Driver
-    username: mgb
+    username: l5
     password: '12345'
     schema-generate: CREATE_UPDATE
     dialect: postgresql
@@ -51,6 +85,6 @@ vertx:
       port: 5432
       host: localhost
       database: ocho
-      user: mgb
+      user: l5
       password: '12345'
       maxSize: 5

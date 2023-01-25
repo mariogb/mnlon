@@ -1,7 +1,10 @@
-package org.lonpe.model;
 
+package org.lonpe.model;            
+
+            
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -11,207 +14,205 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.ManyToOne;
+
 
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "invoice_line_in_in_pkey_idx")})
-public class InvoiceLineIn implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "invoice_line_in_in_pkey_idx")})
+public class InvoiceLineIn implements IDcLon,Serializable{
 
-    public InvoiceLineIn() {
+    public InvoiceLineIn(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_invoice_line_in")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
-    @NotNull
+
+    
+        
+    private LocalDateTime askDate;
+
+    public LocalDateTime getAskDate(){
+        return this.askDate;
+    }
+
+    public void setAskDate(LocalDateTime askDate){
+        this.askDate = askDate;
+    }        
+    
+
+        @NotNull    
     private BigDecimal askQuantity;
 
-    public BigDecimal getAskQuantity() {
+    public BigDecimal getAskQuantity(){
         return this.askQuantity;
     }
 
-    public void setAskQuantity(BigDecimal askQuantity) {
+    public void setAskQuantity(BigDecimal askQuantity){
         this.askQuantity = askQuantity;
-    }
+    }        
+    
 
-    @NotNull
+        @NotNull    
     private LocalDateTime createdDate;
 
-    public LocalDateTime getCreatedDate() {
+    public LocalDateTime getCreatedDate(){
         return this.createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate){
         this.createdDate = createdDate;
+    }        
+    
+
+        @NotNull    
+    private BigDecimal descountPorcent;
+
+    public BigDecimal getDescountPorcent(){
+        return this.descountPorcent;
     }
 
-    @NotNull
-    private BigDecimal descount;
+    public void setDescountPorcent(BigDecimal descountPorcent){
+        this.descountPorcent = descountPorcent;
+    }        
+    
 
-    public BigDecimal getDescount() {
-        return this.descount;
-    }
-
-    public void setDescount(BigDecimal descount) {
-        this.descount = descount;
-    }
-
-    private LocalDateTime invoiceDate;
-
-    public LocalDateTime getInvoiceDate() {
-        return this.invoiceDate;
-    }
-
-    public void setInvoiceDate(LocalDateTime invoiceDate) {
-        this.invoiceDate = invoiceDate;
-    }
-
-    @NotNull
+        @NotNull    
     private Integer orden;
 
-    public Integer getOrden() {
+    public Integer getOrden(){
         return this.orden;
     }
 
-    public void setOrden(Integer orden) {
+    public void setOrden(Integer orden){
         this.orden = orden;
+    }        
+    
+
+        @NotNull    
+    private BigDecimal price;
+
+    public BigDecimal getPrice(){
+        return this.price;
     }
 
-    @NotBlank
-    @NotNull
+    public void setPrice(BigDecimal price){
+        this.price = price;
+    }        
+    
+
+        @NotBlank
+    @NotNull    
     private String status;
 
-    public String getStatus() {
+    public String getStatus(){
         return this.status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(String status){
         this.status = status;
-    }
+    }        
+    
 
+        
     private LocalDateTime supplyDate;
 
-    public LocalDateTime getSupplyDate() {
+    public LocalDateTime getSupplyDate(){
         return this.supplyDate;
     }
 
-    public void setSupplyDate(LocalDateTime supplyDate) {
+    public void setSupplyDate(LocalDateTime supplyDate){
         this.supplyDate = supplyDate;
-    }
+    }        
+    
 
-    @NotNull
+        @NotNull    
     private BigDecimal supplyQuantity;
 
-    public BigDecimal getSupplyQuantity() {
+    public BigDecimal getSupplyQuantity(){
         return this.supplyQuantity;
     }
 
-    public void setSupplyQuantity(BigDecimal supplyQuantity) {
+    public void setSupplyQuantity(BigDecimal supplyQuantity){
         this.supplyQuantity = supplyQuantity;
-    }
+    }        
+    
 
-    @NotNull
+        @NotNull    
     private BigDecimal taxPorcent;
 
-    public BigDecimal getTaxPorcent() {
+    public BigDecimal getTaxPorcent(){
         return this.taxPorcent;
     }
 
-    public void setTaxPorcent(BigDecimal taxPorcent) {
+    public void setTaxPorcent(BigDecimal taxPorcent){
         this.taxPorcent = taxPorcent;
+    }        
+    
+
+    
+    @NotNull
+    @ManyToOne    
+    private Purchase purchase;
+
+    public Purchase getPurchase(){
+        return this.purchase;
     }
+    
+    public void setPurchase(Purchase purchase){
+        this.purchase = purchase;
+    }
+ 
 
     @NotNull
-    private BigDecimal total;
-
-    public BigDecimal getTotal() {
-        return this.total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    @NotNull
-    private BigDecimal totalCost;
-
-    public BigDecimal getTotalCost() {
-        return this.totalCost;
-    }
-
-    public void setTotalCost(BigDecimal totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    @NotNull
-    private BigDecimal unitCost;
-
-    public BigDecimal getUnitCost() {
-        return this.unitCost;
-    }
-
-    public void setUnitCost(BigDecimal unitCost) {
-        this.unitCost = unitCost;
-    }
-
-    @NotNull
-    @ManyToOne
-    private ComercialDocumentOut comercialDocument;
-
-    public ComercialDocumentOut getComercialDocument() {
-        return this.comercialDocument;
-    }
-
-    public void setComercialDocument(ComercialDocumentOut comercialDocument) {
-        this.comercialDocument = comercialDocument;
-    }
-
-    @NotNull
-    @ManyToOne
+    @ManyToOne    
     private Product product;
 
-    public Product getProduct() {
+    public Product getProduct(){
         return this.product;
     }
-
-    public void setProduct(Product product) {
+    
+    public void setProduct(Product product){
         this.product = product;
     }
+ 
 
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private StockRackProduct stockRackProduct;
 
-    public StockRackProduct getStockRackProduct() {
+    public StockRackProduct getStockRackProduct(){
         return this.stockRackProduct;
     }
-
-    public void setStockRackProduct(StockRackProduct stockRackProduct) {
+    
+    public void setStockRackProduct(StockRackProduct stockRackProduct){
         this.stockRackProduct = stockRackProduct;
     }
+ 
 
+    
+      
 }
+        

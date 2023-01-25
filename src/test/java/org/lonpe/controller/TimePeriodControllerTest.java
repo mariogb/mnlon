@@ -49,7 +49,7 @@ public class TimePeriodControllerTest extends AbstractControllerTest<TimePeriod>
     @Test
     public void testSave() throws Exception {
     
-        System.out.println("Inicia login para probar SAVE en TimePeriodControllerController");
+        System.out.println("Inicia login para probar SAVE en TimePeriodController");
     
         final String accessToken = doLogin0(embeddedServer);
         System.out.println("LOGIN CON " + accessToken);
@@ -67,7 +67,7 @@ public class TimePeriodControllerTest extends AbstractControllerTest<TimePeriod>
         timePeriod.setTypeLon("typeLon"+ff);
             
             
-        final MutableHttpRequest<TimePeriod> bearerAuth = HttpRequest.PUT("/pg/timePeriod/sou",timePeriod).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<TimePeriod> bearerAuth = HttpRequest.POST("/pg/timePeriod",timePeriod).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
     
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
         System.out.println("R" + exchange.body());
@@ -100,7 +100,7 @@ public class TimePeriodControllerTest extends AbstractControllerTest<TimePeriod>
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/timePeriod/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/timePeriod").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);

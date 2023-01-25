@@ -1,6 +1,9 @@
-package org.lonpe.model;
 
+package org.lonpe.model;            
+
+            
 import java.time.LocalDateTime;
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -10,86 +13,95 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.ManyToOne;
+
 
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "fligth_instance_in_pkey_idx")})
-public class FligthInstance implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "fligth_instance_in_pkey_idx")})
+public class FligthInstance implements IDcLon,Serializable{
 
-    public FligthInstance() {
+    public FligthInstance(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_fligth_instance")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
-    @NotNull
+
+    
+        @NotNull    
     private LocalDateTime inLocalDateTime;
 
-    public LocalDateTime getInLocalDateTime() {
+    public LocalDateTime getInLocalDateTime(){
         return this.inLocalDateTime;
     }
 
-    public void setInLocalDateTime(LocalDateTime inLocalDateTime) {
+    public void setInLocalDateTime(LocalDateTime inLocalDateTime){
         this.inLocalDateTime = inLocalDateTime;
-    }
+    }        
+    
 
-    @NotNull
+        @NotNull    
     private LocalDateTime outLocalDateTime;
 
-    public LocalDateTime getOutLocalDateTime() {
+    public LocalDateTime getOutLocalDateTime(){
         return this.outLocalDateTime;
     }
 
-    public void setOutLocalDateTime(LocalDateTime outLocalDateTime) {
+    public void setOutLocalDateTime(LocalDateTime outLocalDateTime){
         this.outLocalDateTime = outLocalDateTime;
-    }
+    }        
+    
 
-    @NotBlank
-    @NotNull
+        @NotBlank
+    @NotNull    
     private String pname;
 
-    public String getPname() {
+    public String getPname(){
         return this.pname;
     }
 
-    public void setPname(String pname) {
+    public void setPname(String pname){
         this.pname = pname;
-    }
+    }        
+    
 
+    
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private Fligth theFligth;
 
-    public Fligth getTheFligth() {
+    public Fligth getTheFligth(){
         return this.theFligth;
     }
-
-    public void setTheFligth(Fligth theFligth) {
+    
+    public void setTheFligth(Fligth theFligth){
         this.theFligth = theFligth;
     }
+ 
 
+    
+      
 }
+        

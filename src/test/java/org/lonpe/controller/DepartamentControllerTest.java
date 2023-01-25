@@ -49,7 +49,7 @@ public class DepartamentControllerTest extends AbstractControllerTest<Departamen
     @Test
     public void testSave() throws Exception {
     
-        System.out.println("Inicia login para probar SAVE en DepartamentControllerController");
+        System.out.println("Inicia login para probar SAVE en DepartamentController");
     
         final String accessToken = doLogin0(embeddedServer);
         System.out.println("LOGIN CON " + accessToken);
@@ -69,7 +69,7 @@ public class DepartamentControllerTest extends AbstractControllerTest<Departamen
         departament.setPname("pname"+ff);
             
             
-        final MutableHttpRequest<Departament> bearerAuth = HttpRequest.PUT("/pg/departament/sou",departament).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Departament> bearerAuth = HttpRequest.POST("/pg/departament",departament).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
     
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
         System.out.println("R" + exchange.body());
@@ -102,7 +102,7 @@ public class DepartamentControllerTest extends AbstractControllerTest<Departamen
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/departament/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/departament").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);

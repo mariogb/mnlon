@@ -12,8 +12,11 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.security.authentication.AuthenticationProvider;
 import io.micronaut.security.authentication.AuthenticationRequest;
 import io.micronaut.security.authentication.AuthenticationResponse;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiConsumer;
+
+import io.reactivex.functions.Function;
 import io.vertx.reactivex.sqlclient.Tuple;
 import jakarta.inject.Inject;
 import org.reactivestreams.Publisher;
@@ -44,12 +47,51 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
     private final String sqlProgram = "select program.pkey from program_user_lon, program  where program_user_lon.user_lon_id = $1 and program_user_lon.program_id = program.id";
 
     private void putMemebership(String sql, Long id0, Map attrs, String name) {
+
         final Map mBU = crudLon.doList(sql, Tuple.of(id0)).blockingGet();
         final List<List<String>> lo0 = (List<List<String>>) mBU.get("l");
         if (lo0 != null) {
             attrs.put(name, lo0.stream().map((List<String> t) -> t.get(0)).collect(Collectors.toList()));
         }
 
+    }
+
+    private Observable<Integer> putMemebership2(String sql, Long id0, final Map<String, List<String>> attrs, String name) {
+        // final List<Observable<JsonObject>> lo = new ArrayList<>();
+        return crudLon.doList(sql, Tuple.of(id0))
+                .map((Map<String, Object> mBU) -> {
+                    final List<List<String>> lo0 = (List<List<String>>) mBU.get("l");
+                    if (lo0 != null) {
+                        List<String> l = lo0.stream().map((List<String> t) -> t.get(0)).collect(Collectors.toList());
+
+                        attrs.put(name, l);
+                        return 1;
+                    }
+
+                    return 0;
+                }).toObservable();
+
+        /*
+         
+                 @Override
+            public Integer apply(Map<String, Object> mBU) throws Exception {
+                final List<List<String>> lo0 = (List<List<String>>) mBU.get("l");
+                if (lo0 != null) {
+                    attrs.put(name, lo0.stream().map((List<String> t) -> t.get(0)).collect(Collectors.toList()));
+                    return 1;
+                }
+                return 0;
+            }
+         
+         */
+        //Observable<Map<String, Object>> toObservable = crudLon.doList(sql, Tuple.of(id0)).toObservable();
+        //final Map mBU =
+        //crudLon.doList(sql, Tuple.of(id0)).;
+//                .blockingGet();
+//        final List<List<String>> lo0 = (List<List<String>>) mBU.get("l");
+//        if (lo0 != null) {
+//            attrs.put(name, lo0.stream().map((List<String> t) -> t.get(0)).collect(Collectors.toList()));
+//        }
     }
 
     private static final String sql00 = "select id,pkey,pname,password,username,type_lon from user_lon where username = $1";
@@ -67,6 +109,9 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
 
                 Disposable subscribe = crudLon.getOne(sql00, tuple).subscribe((Map<String, Object> mUser) -> {
                     boolean matches = false;
+                    
+                    
+                    
                     final String secret = authenticationRequest.getSecret().toString();
                     final Object password = mUser.get("password");
                     if (password != null) {
@@ -88,12 +133,28 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
                     attrs.put("TYPELON", type_lon);
                     if (!type_lon.equals("ADM")) {
 
-                        putMemebership(sqlBase, id0, attrs, "baseIds");
-                        putMemebership(sqlDepartament, id0, attrs, "departamentIds");
-                        putMemebership(sqlProgram, id0, attrs, "programIds");
-                    }
+                        final List<Observable<Integer>> lo = new ArrayList<>();
 
-                    emitter.success(AuthenticationResponse.success("user", roles, attrs));
+                        lo.add(putMemebership2(sqlBase, id0, attrs, "baseKeys"));
+                        lo.add(putMemebership2(sqlDepartament, id0, attrs, "departamentKeys"));
+                        lo.add(putMemebership2(sqlProgram, id0, attrs, "programKeys"));
+
+                        Observable.concat(lo)
+                                .toList()
+                                .subscribe(new io.reactivex.functions.Consumer<List<Integer>>() {
+                                    @Override
+                                    public void accept(List<Integer> t) {
+                                        System.out.println("----En ");
+                                        emitter.success(AuthenticationResponse.success("user", roles, attrs));
+                                    }
+
+                                });
+//putMemebership(sqlBase, id0, attrs, "baseIds");
+                        // putMemebership(sqlDepartament, id0, attrs, "departamentIds");
+                        // putMemebership(sqlProgram, id0, attrs, "programIds");
+                    } else {
+                        emitter.success(AuthenticationResponse.success("user", roles, attrs));
+                    }
 
                 }, (Throwable t) -> {
 

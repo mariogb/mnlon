@@ -49,7 +49,7 @@ public class PaymentOutTypeControllerTest extends AbstractControllerTest<Payment
     @Test
     public void testSave() throws Exception {
     
-        System.out.println("Inicia login para probar SAVE en PaymentOutTypeControllerController");
+        System.out.println("Inicia login para probar SAVE en PaymentOutTypeController");
     
         final String accessToken = doLogin0(embeddedServer);
         System.out.println("LOGIN CON " + accessToken);
@@ -65,7 +65,7 @@ public class PaymentOutTypeControllerTest extends AbstractControllerTest<Payment
         paymentOutType.setPname("pname"+ff);
             
             
-        final MutableHttpRequest<PaymentOutType> bearerAuth = HttpRequest.PUT("/pg/paymentOutType/sou",paymentOutType).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<PaymentOutType> bearerAuth = HttpRequest.POST("/pg/paymentOutType",paymentOutType).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
     
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
         System.out.println("R" + exchange.body());
@@ -98,7 +98,7 @@ public class PaymentOutTypeControllerTest extends AbstractControllerTest<Payment
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/paymentOutType/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/paymentOutType").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);

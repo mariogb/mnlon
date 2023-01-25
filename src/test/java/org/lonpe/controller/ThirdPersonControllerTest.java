@@ -49,7 +49,7 @@ public class ThirdPersonControllerTest extends AbstractControllerTest<ThirdPerso
     @Test
     public void testSave() throws Exception {
     
-        System.out.println("Inicia login para probar SAVE en ThirdPersonControllerController");
+        System.out.println("Inicia login para probar SAVE en ThirdPersonController");
     
         final String accessToken = doLogin0(embeddedServer);
         System.out.println("LOGIN CON " + accessToken);
@@ -69,7 +69,7 @@ public class ThirdPersonControllerTest extends AbstractControllerTest<ThirdPerso
         thirdPerson.setTipo("tipo"+ff);
             
             
-        final MutableHttpRequest<ThirdPerson> bearerAuth = HttpRequest.PUT("/pg/thirdPerson/sou",thirdPerson).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<ThirdPerson> bearerAuth = HttpRequest.POST("/pg/thirdPerson",thirdPerson).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
     
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
         System.out.println("R" + exchange.body());
@@ -102,7 +102,7 @@ public class ThirdPersonControllerTest extends AbstractControllerTest<ThirdPerso
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/thirdPerson/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/thirdPerson").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);

@@ -1,6 +1,9 @@
-package org.lonpe.model;
 
+package org.lonpe.model;            
+
+            
 import java.util.Set;
+         
 
 import io.micronaut.core.annotation.Introspected;
 import javax.persistence.Entity;
@@ -10,112 +13,122 @@ import java.io.Serializable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotNull;  
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 
+
 @Introspected
 @Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkey"}, name = "departament_job_instance_in_pkey_idx")})
-public class DepartamentJobInstance implements IDcLon, Serializable {
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"pkey"},name = "departament_job_instance_in_pkey_idx")})
+public class DepartamentJobInstance implements IDcLon,Serializable{
 
-    public DepartamentJobInstance() {
+    public DepartamentJobInstance(){
     }
 
     @Id
     @GeneratedValue(generator = "seq_departament_job_instance")
     private Long id;
-
-    public Long getId() {
+      
+    public Long getId(){
         return this.id;
     }
-
-    public void setId(Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    @NotBlank
+    @NotBlank 
     @NotNull
     private String pkey;
 
-    public String getPkey() {
+    public String getPkey(){
         return this.pkey;
     }
 
-    public void setPkey(String pkey) {
+    public void setPkey(String pkey){
         this.pkey = pkey;
     }
 
-    @NotBlank
+
+    
+        @NotBlank    
     private String description;
 
-    public String getDescription() {
+    public String getDescription(){
         return this.description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description){
         this.description = description;
-    }
+    }        
+    
 
-    @NotNull
+        @NotNull    
     private Integer nhoras;
 
-    public Integer getNhoras() {
+    public Integer getNhoras(){
         return this.nhoras;
     }
 
-    public void setNhoras(Integer nhoras) {
+    public void setNhoras(Integer nhoras){
         this.nhoras = nhoras;
-    }
+    }        
+    
 
-    @NotBlank
-    @NotNull
+        @NotBlank
+    @NotNull    
     private String pname;
 
-    public String getPname() {
+    public String getPname(){
         return this.pname;
     }
 
-    public void setPname(String pname) {
+    public void setPname(String pname){
         this.pname = pname;
-    }
+    }        
+    
 
+    
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private DepartamentJob departamentJob;
 
-    public DepartamentJob getDepartamentJob() {
+    public DepartamentJob getDepartamentJob(){
         return this.departamentJob;
     }
-
-    public void setDepartamentJob(DepartamentJob departamentJob) {
+    
+    public void setDepartamentJob(DepartamentJob departamentJob){
         this.departamentJob = departamentJob;
     }
+ 
 
     @NotNull
-    @ManyToOne
+    @ManyToOne    
     private DepartamentBaseTimePeriod departamentBaseTimePeriod;
 
-    public DepartamentBaseTimePeriod getDepartamentBaseTimePeriod() {
+    public DepartamentBaseTimePeriod getDepartamentBaseTimePeriod(){
         return this.departamentBaseTimePeriod;
     }
-
-    public void setDepartamentBaseTimePeriod(DepartamentBaseTimePeriod departamentBaseTimePeriod) {
+    
+    public void setDepartamentBaseTimePeriod(DepartamentBaseTimePeriod departamentBaseTimePeriod){
         this.departamentBaseTimePeriod = departamentBaseTimePeriod;
     }
+ 
 
+    
     @OneToMany
-    @JoinColumn(name = "departament_job_instance_id")
+    @JoinColumn(name = "departament_job_instance_id")    
     private Set<Appointment> appointmens;
 
-    public Set<Appointment> getAppointmens() {
+    public Set<Appointment> getAppointmens(){
         return this.appointmens;
     }
-
-    public void setAppointmens(Set<Appointment> appointmens) {
+    
+    public void setAppointmens(Set<Appointment> appointmens){
         this.appointmens = appointmens;
     }
-
+ 
+      
 }
+        

@@ -49,7 +49,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest<ProductTyp
     @Test
     public void testSave() throws Exception {
     
-        System.out.println("Inicia login para probar SAVE en ProductTypeControllerController");
+        System.out.println("Inicia login para probar SAVE en ProductTypeController");
     
         final String accessToken = doLogin0(embeddedServer);
         System.out.println("LOGIN CON " + accessToken);
@@ -77,7 +77,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest<ProductTyp
                 productType.setWithSerialNumber(true);
                     
             
-        final MutableHttpRequest<ProductType> bearerAuth = HttpRequest.PUT("/pg/productType/sou",productType).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<ProductType> bearerAuth = HttpRequest.POST("/pg/productType",productType).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
     
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
         System.out.println("R" + exchange.body());
@@ -110,7 +110,7 @@ public class ProductTypeControllerTest extends AbstractControllerTest<ProductTyp
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/productType/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/productType").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);

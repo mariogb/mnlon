@@ -49,7 +49,7 @@ public class UserLonControllerTest extends AbstractControllerTest<UserLon> {
     @Test
     public void testSave() throws Exception {
     
-        System.out.println("Inicia login para probar SAVE en UserLonControllerController");
+        System.out.println("Inicia login para probar SAVE en UserLonController");
     
         final String accessToken = doLogin0(embeddedServer);
         System.out.println("LOGIN CON " + accessToken);
@@ -75,7 +75,7 @@ public class UserLonControllerTest extends AbstractControllerTest<UserLon> {
         userLon.setUsername("username"+ff);
             
             
-        final MutableHttpRequest<UserLon> bearerAuth = HttpRequest.PUT("/pg/userLon/sou",userLon).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<UserLon> bearerAuth = HttpRequest.POST("/pg/userLon",userLon).bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
     
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
         System.out.println("R" + exchange.body());
@@ -108,7 +108,7 @@ public class UserLonControllerTest extends AbstractControllerTest<UserLon> {
     
         final Rx3HttpClient client0 = createHttpClient(embeddedServer.getURL());
                     
-        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/userLon/l").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
+        final MutableHttpRequest<Object> bearerAuth = HttpRequest.GET("/pg/userLon").bearerAuth(accessToken).accept(MediaType.APPLICATION_JSON);
         System.out.println("---------------------------");
 
         HttpResponse<Map> exchange = client0.toBlocking().exchange(bearerAuth, Map.class);
